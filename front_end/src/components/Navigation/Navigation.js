@@ -19,7 +19,7 @@ export default (props) => {
                 <div><Link to="/wystepy">Wystepy</Link></div>
                 <div><Link to="/mecze">Mecze</Link></div>
                 <div><Link to="/druzyny">Drużyny</Link></div>
-                <div><Link to="/">Wyloguj</Link></div>
+                <div><Link to="/login">Wyloguj</Link></div>
             </div>
             <div>
             </div>

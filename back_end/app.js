@@ -6,11 +6,12 @@ var logger = require('morgan');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/userService');
 var meczRouter = require('./routes/meczService');
 var zawodnikRouter = require('./routes/zawodnikService');
 var wystepRouter = require('./routes/wystepService');
 var druzynaRouter = require('./routes/druzynaService');
+
 
 var app = express();
 const port = 3001;
@@ -27,11 +28,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/wystepy', wystepRouter);
 app.use('/mecze', meczRouter);
 app.use('/zawodnicy', zawodnikRouter);
 app.use('/druzyny', druzynaRouter);
+app.use('/user', usersRouter);
 
 
 // catch 404 and forward to error handler

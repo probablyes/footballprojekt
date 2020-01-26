@@ -19,6 +19,7 @@ import MeczeList from "./components/Mecze/RecordList/RecordList";
 import MeczeForm from "./components/Mecze/RecordForm/RecordForm";
 import WystepyList from "./components/Wystepy/RecordList/RecordList";
 import WystepyForm from "./components/Wystepy/RecordForm/RecordForm";
+import Login from "./components/Login/LoginContainer";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route exact path="/wystepy/form">
               <WystepyForm/>
+          </Route>
+          <Route exact path="/login">
+              <Login/>
           </Route>
       </Switch>
 
