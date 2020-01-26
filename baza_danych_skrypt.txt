@@ -1,0 +1,115 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema tin_project
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema tin_project
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `tin_project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `tin_project` ;
+
+-- -----------------------------------------------------
+-- Table `tin_project`.`artykul`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tin_project`.`artykul` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `opis` LONGTEXT NOT NULL,
+  `naglowek` LONGTEXT NOT NULL,
+  `data` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `tin_project`.`druzyna`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tin_project`.`druzyna` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nazwa` VARCHAR(63) NOT NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 35
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `tin_project`.`mecz`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tin_project`.`mecz` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `data` DATETIME NOT NULL,
+  `wynik` VARCHAR(10) NOT NULL,
+  `Druzyna_Id` INT(11) NOT NULL,
+  `Druzyna_2_Id` INT(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `Mecz_Gosc` (`Druzyna_2_Id` ASC),
+  INDEX `Mecz_Gospodarz` (`Druzyna_Id` ASC),
+  CONSTRAINT `Mecz_Gosc`
+    FOREIGN KEY (`Druzyna_2_Id`)
+    REFERENCES `tin_project`.`druzyna` (`Id`),
+  CONSTRAINT `Mecz_Gospodarz`
+    FOREIGN KEY (`Druzyna_Id`)
+    REFERENCES `tin_project`.`druzyna` (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `tin_project`.`wystep`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tin_project`.`wystep` (
+  `Zawodnik_Id` INT(11) NOT NULL,
+  `Mecz_Id` INT(11) NOT NULL,
+  `gole` INT(11) NOT NULL,
+  `asysty` INT(11) NOT NULL,
+  `minuty` INT(11) NOT NULL,
+  `zolte_kartki` INT(11) NOT NULL,
+  `czerwona_kartka` TINYINT(1) NULL DEFAULT NULL,
+  `opis_wystepu` LONGTEXT NOT NULL,
+  `Id_p` INT(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`Id_p`),
+  INDEX `Wystep_Mecz` (`Mecz_Id` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `tin_project`.`zawodnik`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tin_project`.`zawodnik` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `imie` VARCHAR(50) NOT NULL,
+  `nazwisko` VARCHAR(50) NOT NULL,
+  `data_urodzenia` DATETIME NOT NULL,
+  `data_dolaczenia` DATETIME NOT NULL,
+  `Druzyna_Id` INT(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `Zawodnik_Druzyna` (`Druzyna_Id` ASC),
+  CONSTRAINT `Zawodnik_Druzyna`
+    FOREIGN KEY (`Druzyna_Id`)
+    REFERENCES `tin_project`.`druzyna` (`Id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
