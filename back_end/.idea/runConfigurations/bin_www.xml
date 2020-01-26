@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="bin\www" type="NodeJSConfigurationType" path-to-js-file="$PROJECT_DIR$/front-end/bin/www" working-dir="$PROJECT_DIR$/../TIN_NodeProject_back-end">
+    <envs>
+      <env name="DEBUG" value="tin-nodeproject:*" />
+    </envs>
+    <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
+      <browser url="http://localhost:3000/" />
+    </EXTENSION>
+    <method v="2" />
+  </configuration>
+</component>
